@@ -5,23 +5,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Bayou AR</title>
     
-    <script type="module" crossorigin src="/ARSiliconBayou/assets/index-cf2a1172.js"></script>
+    <script type="module" crossorigin src="/ARSiliconBayou/assets/index-f1e3213c.js"></script>
     <link rel="stylesheet" href="/ARSiliconBayou/assets/index-86d2b89f.css">
   </head>
   <body>
-    <!-- Camera views (shared canvas) -->
-    <main id="camera-view" class="view hidden" role="main" aria-live="polite">
-      <header class="top-bar">
-        <div id="view-title">Bayou</div>
-        <div class="tools">
+    <!-- Camera view (fullscreen except bottom nav) -->
+    <main id="camera-view" class="view hidden" role="main" aria-live="polite" style="padding:0;">
+      <div
+        class="camera-container"
+        style="
+          position:relative;
+          width:100vw;
+          height:calc(100svh - var(--bottomnavH) - env(safe-area-inset-bottom));
+          max-height:none;
+          aspect-ratio:auto;
+          margin:0;
+          border-radius:0;
+          box-shadow:none;
+          background:#000;
+        "
+      >
+        <canvas id="canvas"></canvas>
+
+        <!-- small tool overlay (top-right) -->
+        <div style="position:absolute; top:12px; right:12px; display:flex; gap:8px; z-index:10;">
           <button id="btn-toggle-aspect" class="tool-btn" title="Toggle Aspect">3:4</button>
           <button id="btn-switch-cam" class="tool-btn" title="Switch Camera">Rear</button>
-          <button id="capture-button" class="primary-btn">Capture</button>
         </div>
-      </header>
 
-      <div class="camera-container">
-        <canvas id="canvas"></canvas>
+        <!-- capture button above bottom nav -->
+        <button
+          id="capture-button"
+          class="primary-btn"
+          style="position:absolute; left:50%; transform:translateX(-50%);
+                 bottom:calc(var(--bottomnavH) + 16px); z-index:10;"
+        >
+          Capture
+        </button>
       </div>
     </main>
 
@@ -54,19 +74,19 @@
     <nav class="bottom-nav" aria-label="Primary">
       <button id="tab-bayou" class="nav-btn" data-tab="bayou">
         <span class="icon">
-          <img src="images/alligator.png" alt="Bayou" style="width:40px; height:auto;" />
+          <img src="images/alligator.png" alt="Bayou" />
         </span>
         <span class="label">Bayou</span>
       </button>
       <button id="tab-photo" class="nav-btn" data-tab="photo" aria-label="Photo Booth">
         <span class="icon">
-          <img src="images/photo.png" alt="Photo-Booth" style="width:40px; height:auto;" />
+          <img src="images/photo.png" alt="Photo-Booth" />
         </span>
         <span class="label">Photo-Booth</span>
       </button>
       <button id="tab-bag" class="nav-btn" data-tab="bag" aria-label="Backpack">
         <span class="icon">
-          <img src="images/backpack.png" alt="Backpack" style="width:35px; height:auto;" />
+          <img src="images/backpack.png" alt="Backpack" />
         </span>
         <span class="label">Gallery</span>
       </button>
